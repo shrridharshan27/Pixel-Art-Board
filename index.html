@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Drawing Board</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            text-align: center;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(16, 25px);
+            grid-gap: 2px;
+            margin: 20px auto;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .pixel {
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .pixel:hover {
+            transform: scale(1.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input {
+            width: 120px;
+            background: #fff;
+        }
+        button {
+            background: #ff758c;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff5470;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pixel Art Drawing Board</h1>
+        <input type="color" id="colorPicker" value="#000000">
+        <button onclick="clearBoard()">Clear Board</button>
+        <div class="grid" id="grid"></div>
+    </div>
+    
+    <script>
+        const grid = document.getElementById("grid");
+        const colorPicker = document.getElementById("colorPicker");
+        
+        for (let i = 0; i < 256; i++) {
+            let pixel = document.createElement("div");
+            pixel.classList.add("pixel");
+            pixel.addEventListener("mousedown", function() {
+                pixel.style.backgroundColor = colorPicker.value;
+            });
+            grid.appendChild(pixel);
+        }
+        
+        function clearBoard() {
+            document.querySelectorAll(".pixel").forEach(pixel => {
+                pixel.style.backgroundColor = "white";
+            });
+        }
+    </script>
+</body>
+</html>
